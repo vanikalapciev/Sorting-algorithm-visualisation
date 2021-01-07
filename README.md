@@ -3,7 +3,7 @@ Personal Python project to visualise sorting algorithm
 
 Code will visualise the process of diferent sorting algorithms!
 
-Set up paramaeters in `main.py` and launch it
+Set up parameters in `main.py` and launch it!
 
 DISCLAIMER:
 Code is in early stages and not yet finished
