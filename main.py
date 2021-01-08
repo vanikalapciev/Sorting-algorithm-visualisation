@@ -5,35 +5,26 @@ import sorting
 import time
 from matplotlib import pyplot as plt
 from matplotlib import animation
-from sorting import bubblesort
-from _ast import Print
+from sorting import *
 from matplotlib.animation import FuncAnimation
 
 
-setSize = 100
+setSize = 50
 i=0
+
+ax = plt.axes()
+plt.xlim(0,setSize) 
+plt.ylim(0,setSize)
 ind = np.arange(setSize-1)
-fig = plt.figure()
-ax = fig.add_axes([0,0,1,1], animated=True)
 
 numbers = random.sample(range(1, setSize), setSize-1)
-numberArray = [numbers]
-'''
-while i < setSize:
-    numbers = bubblesort(numbers, i)
-    numberArray.append(numbers)
-    ax.bar(ind,numbers)
-    i += 1
 
-print(numberArray)
-'''
-def animate(i):
-    numbers = bubblesort(numbers, i)
-    ax.bar(ind,numbers)
-    return ax
+for i in range(setSize):        
+     numbers = quick_sort(numbers, i) 
+     ax.bar(ind,numbers) 
+     plt.draw() 
+     plt.pause(0.001) 
+     if i < setSize-1:
+         ax.cla()
 
-#ax.bar(ind,numbers)
-ani = FuncAnimation(fig, animate, blit=True)
-plt.show()    
 plt.show()
-
