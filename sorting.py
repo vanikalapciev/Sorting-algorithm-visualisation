@@ -60,55 +60,48 @@ def heap_sort(nums, noOfIter):
     return nums
 
 #merge sort
-def merge(left_list, right_list, noOfIter):
-    sorted_list = []
-    left_list_index = right_list_index = 0
-
-    # We use the list lengths often, so its handy to make variables
-    left_list_length, right_list_length = len(left_list), len(right_list)
-
-    for _ in range(noOfIter):
-        if left_list_index < left_list_length and right_list_index < right_list_length:
-            # We check which value from the start of each list is smaller
-            # If the item at the beginning of the left list is smaller, add it
-            # to the sorted list
-            if left_list[left_list_index] <= right_list[right_list_index]:
-                sorted_list.append(left_list[left_list_index])
-                left_list_index += 1
-            # If the item at the beginning of the right list is smaller, add it
-            # to the sorted list
-            else:
-                sorted_list.append(right_list[right_list_index])
-                right_list_index += 1
-
-        # If we've reached the end of the of the left list, add the elements
-        # from the right list
-        elif left_list_index == left_list_length:
-            sorted_list.append(right_list[right_list_index])
-            right_list_index += 1
-        # If we've reached the end of the of the right list, add the elements
-        # from the left list
-        elif right_list_index == right_list_length:
-            sorted_list.append(left_list[left_list_index])
-            left_list_index += 1
-
-    return sorted_list
-
-
 def merge_sort(nums, noOfIter):
-    # If the list is a single element, return it
-    if len(nums) <= 1:
-        return nums
-
-    # Use floor division to get midpoint, indices must be integers
-    mid = len(nums) // 2
-
-    # Sort and merge each half
-    left_list = merge_sort(nums[:mid], noOfIter)
-    right_list = merge_sort(nums[mid:], noOfIter)
-
-    # Merge the sorted lists into a new one
-    return merge(left_list, right_list, noOfIter)
+    middle = noOfIter // 2
+    if len(nums) > 1:
+ 
+        # Finding the mid of the array
+        mid = len(nums)//2
+ 
+        # Dividing the array elements
+        L = nums[:mid]
+ 
+        # into 2 halves
+        R = nums[mid:]
+ 
+        # Sorting the first half
+        merge_sort(L, noOfIter)
+ 
+        # Sorting the second half
+        merge_sort(R, noOfIter)
+ 
+        i = j = k = 0
+ 
+        # Copy data to temp arrays L[] and R[]
+        while i < middle and j < middle:
+            if L[i] < R[j]:
+                nums[k] = L[i]
+                i += 1
+            else:
+                nums[k] = R[j]
+                j += 1
+            k += 1
+ 
+        # Checking if any element was left
+        while i < middle:
+            nums[k] = L[i]
+            i += 1
+            k += 1
+ 
+        while j < middle:
+            nums[k] = R[j]
+            j += 1
+            k += 1
+    return nums
 
 #QuickSort
 def partition(nums, low, high):
@@ -137,4 +130,44 @@ def quick_sort(nums, noOfIter):
             _quick_sort(items, split_index + 1, high)
 
     _quick_sort(nums, 0, noOfIter - 1)
+    return nums
+
+def shell_sort(nums, noOfIter): 
+  
+    n = noOfIter
+    
+    gap = n//2
+   
+    while gap > 0: 
+  
+        for i in range(gap,n): 
+  
+            temp = nums[i] 
+  
+            j = i 
+            while  j >= gap and nums[j-gap] >temp: 
+                nums[j] = nums[j-gap] 
+                j -= gap 
+  
+            nums[j] = temp 
+        gap //= 2
+    return nums
+
+def pigeonhole_sort(nums, noOfIter): 
+    my_min = min(nums) 
+    my_max = max(nums) 
+    size = my_max - my_min + 1
+  
+    holes = [0] * size 
+  
+    for x in nums: 
+        assert type(x) is int, "integers only please"
+        holes[x - my_min] += 1
+  
+    i = 0
+    for count in range(noOfIter): 
+        while holes[count] > 0: 
+            holes[count] -= 1
+            nums[i] = count + my_min 
+            i += 1
     return nums
