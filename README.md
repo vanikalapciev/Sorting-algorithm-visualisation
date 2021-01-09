@@ -13,6 +13,8 @@ The script visualises next algorithms:
 - Heap sort: `heap_sort`
 - Merge sort: `merge_sort` - Buggy
 - Quick sort: `quick_sort`
+- Pigeonhole Sort: `pigeonhole_sort`
+- ShellSort: `shell_sort`
 
 ## Co come:
 - Recursive Bubble Sort
@@ -24,7 +26,6 @@ The script visualises next algorithms:
 - ShellSort
 - TimSort
 - Comb Sort
-- Pigeonhole Sort
 - Cycle Sort
 - Cocktail Sort
 - Strand Sort
