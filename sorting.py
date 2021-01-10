@@ -1,140 +1,80 @@
 #Bubble sort
-def bubble_sort(list, noOfIter):
-# Swap the elements to arrange in order    for iter_num in range(len(list)-1,0,-1):
-    for iter_num in range(noOfIter-1,0,-1):
-        for idx in range(iter_num):
-            if list[idx]>list[idx+1]:
-                temp = list[idx]
-                list[idx] = list[idx+1]
-                list[idx+1] = temp
-    return list
+def bubbleSort(arr, iterations): 
+    n = len(arr) 
+  
+    for i in range(iterations): 
+
+        for j in range(0, n-i-1): 
+  
+            if arr[j] > arr[j+1] : 
+                arr[j], arr[j+1] = arr[j+1], arr[j] 
+    return arr
 
 #SelectionSort
-def selection_sort(nums, noOfIter):
-    for i in range(noOfIter):
-        lowest_value_index = i
-        for j in range(i + 1, noOfIter):
-            if nums[j] < nums[lowest_value_index]:
-                lowest_value_index = j
-        nums[i], nums[lowest_value_index] = nums[lowest_value_index], nums[i]
-    return nums
+def selectionSort(arr, iterations):
+    for i in range(iterations): 
+      
+    # Find the minimum element in remaining  
+    # unsorted array 
+        min_idx = i 
+        for j in range(i+1, len(arr)): 
+            if arr[min_idx] > arr[j]: 
+                min_idx = j 
+                  
+        # Swap the found minimum element with  
+        # the first element         
+        arr[i], arr[min_idx] = arr[min_idx], arr[i] 
+    
+    return arr
 
 #InsertionSort
-def insertion_sort(nums, noOfIter):
-    for i in range(1, noOfIter):
-        item_to_insert = nums[i]
-        j = i - 1
-        while j >= 0 and nums[j] > item_to_insert:
-            nums[j + 1] = nums[j]
-            j -= 1
-        nums[j + 1] = item_to_insert
-    return nums
+def insertionSort(arr, iterations): 
+  
+    for i in range(iterations): 
+  
+        key = arr[i] 
+  
+        j = i-1
+        while j >= 0 and key < arr[j] : 
+                arr[j + 1] = arr[j] 
+                j -= 1
+        arr[j + 1] = key
+    return arr
 
 #helper to heap sort
-def heapify(nums, heap_size, root_index):
-    largest = root_index
-    left_child = (2 * root_index) + 1
-    right_child = (2 * root_index) + 2
+def heapify(arr, n, i):
+    largest = i  # Initialize largest as root
+    l = 2 * i + 1     # left = 2*i + 1
+    r = 2 * i + 2     # right = 2*i + 2
 
-    if left_child < heap_size and nums[left_child] > nums[largest]:
-        largest = left_child
-
-    if right_child < heap_size and nums[right_child] > nums[largest]:
-        largest = right_child
-
-    if largest != root_index:
-        nums[root_index], nums[largest] = nums[largest], nums[root_index]
-        heapify(nums, heap_size, largest)
-
+    if l < n and arr[largest] < arr[l]:
+        largest = l
+ 
+    if r < n and arr[largest] < arr[r]:
+        largest = r
+ 
+    if largest != i:
+        arr[i], arr[largest] = arr[largest], arr[i]  # swap
+ 
+        heapify(arr, n, largest)
+ 
+ 
 #Heap sort
-def heap_sort(nums, noOfIter):
-    n = noOfIter
-
-    for i in range(n, -1, -1):
-        heapify(nums, n, i)
-
-    for i in range(n - 1, 0, -1):
-        nums[i], nums[0] = nums[0], nums[i]
-        heapify(nums, i, 0)
-        
-    return nums
-
-#merge sort
-def merge_sort(nums, noOfIter):
-    middle = noOfIter // 2
-    if len(nums) > 1:
+def heapSort(arr, iterations):
+    n = iterations
  
-        # Finding the mid of the array
-        mid = len(nums)//2
+    for i in range(n//2 - 1, -1, -1):
+        heapify(arr, n, i)
  
-        # Dividing the array elements
-        L = nums[:mid]
- 
-        # into 2 halves
-        R = nums[mid:]
- 
-        # Sorting the first half
-        merge_sort(L, noOfIter)
- 
-        # Sorting the second half
-        merge_sort(R, noOfIter)
- 
-        i = j = k = 0
- 
-        # Copy data to temp arrays L[] and R[]
-        while i < middle and j < middle:
-            if L[i] < R[j]:
-                nums[k] = L[i]
-                i += 1
-            else:
-                nums[k] = R[j]
-                j += 1
-            k += 1
- 
-        # Checking if any element was left
-        while i < middle:
-            nums[k] = L[i]
-            i += 1
-            k += 1
- 
-        while j < middle:
-            nums[k] = R[j]
-            j += 1
-            k += 1
-    return nums
+    for i in range(n-1, 0, -1):
+        arr[i], arr[0] = arr[0], arr[i]  # swap
+        heapify(arr, i, 0)
+    return arr
 
-#QuickSort
-def partition(nums, low, high):
-    pivot = nums[(low + high) // 2]
-    i = low - 1
-    j = high + 1
-    while True:
-        i += 1
-        while nums[i] < pivot:
-            i += 1
-
-        j -= 1
-        while nums[j] > pivot:
-            j -= 1
-
-        if i >= j:
-            return j
-
-        nums[i], nums[j] = nums[j], nums[i]
-
-def quick_sort(nums, noOfIter):
-    def _quick_sort(items, low, high):
-        if low < high:
-            split_index = partition(items, low, high)
-            _quick_sort(items, low, split_index)
-            _quick_sort(items, split_index + 1, high)
-
-    _quick_sort(nums, 0, noOfIter - 1)
-    return nums
-
-def shell_sort(nums, noOfIter): 
+#shell sort
+def shellSort(arr, iterations): 
   
-    n = noOfIter
+    n = iterations
     
     gap = n//2
    
@@ -142,32 +82,54 @@ def shell_sort(nums, noOfIter):
   
         for i in range(gap,n): 
   
-            temp = nums[i] 
+            temp = arr[i] 
   
             j = i 
-            while  j >= gap and nums[j-gap] >temp: 
-                nums[j] = nums[j-gap] 
+            while  j >= gap and arr[j-gap] >temp: 
+                arr[j] = arr[j-gap] 
                 j -= gap 
   
-            nums[j] = temp 
+            arr[j] = temp 
         gap //= 2
-    return nums
+    return arr
 
-def pigeonhole_sort(nums, noOfIter): 
-    my_min = min(nums) 
-    my_max = max(nums) 
+def pigeonholeSort(arr, iterations): 
+    my_min = min(arr) 
+    my_max = max(arr) 
     size = my_max - my_min + 1
   
     holes = [0] * size 
   
-    for x in nums: 
+    for x in arr: 
         assert type(x) is int, "integers only please"
         holes[x - my_min] += 1
   
     i = 0
-    for count in range(noOfIter): 
+    for count in range(iterations): 
         while holes[count] > 0: 
             holes[count] -= 1
-            nums[i] = count + my_min 
+            arr[i] = count + my_min 
             i += 1
-    return nums
+    return arr
+
+def countSort(arr, iterations): 
+    max_element = int(max(arr)) 
+    min_element = int(min(arr)) 
+    range_of_elements = max_element - min_element + 1
+    count_arr = [0 for _ in range(range_of_elements)] 
+    output_arr = [0 for _ in range(len(arr))] 
+  
+    for i in range(len(arr)): 
+        count_arr[arr[i]-min_element] += 1
+  
+    for i in range(1, len(count_arr)): 
+        count_arr[i] += count_arr[i-1] 
+  
+    for i in range(iterations-1, -1, -1): 
+        output_arr[count_arr[arr[i] - min_element] - 1] = arr[i] 
+        count_arr[arr[i] - min_element] -= 1
+  
+    for i in range(iterations): 
+        arr[i] = output_arr[i] 
+  
+    return arr
