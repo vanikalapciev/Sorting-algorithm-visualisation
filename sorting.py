@@ -1,20 +1,15 @@
 #Bubble sort
-
 def bubbleSort(arr, iterations): 
     n = len(arr) 
   
-    # Traverse through all array elements 
     for i in range(iterations): 
-  
-        # Last i elements are already in place 
+
         for j in range(0, n-i-1): 
   
-            # traverse the array from 0 to n-i-1 
-            # Swap if the element found is greater 
-            # than the next element 
             if arr[j] > arr[j+1] : 
                 arr[j], arr[j+1] = arr[j+1], arr[j] 
     return arr
+
 #SelectionSort
 def selectionSort(arr, iterations):
     for i in range(iterations): 
@@ -43,6 +38,10 @@ def insertionSort(arr, iterations):
         # Move elements of arr[0..i-1], that are 
         # greater than key, to one position ahead 
         # of their current position 
+    for i in range(iterations): 
+  
+        key = arr[i] 
+  
         j = i-1
         while j >= 0 and key < arr[j] : 
                 arr[j + 1] = arr[j] 
@@ -89,9 +88,6 @@ def heapSort(arr, iterations):
         heapify(arr, i, 0)
     return arr
 
-#merge sort
-
-#QuickSort
 
 #shell sort
 def shellSort(arr, iterations): 
@@ -159,6 +155,19 @@ def countSort(arr, iterations):
   
     # Copy the output array to arr, so that arr now 
     # contains sorted characters 
+    count_arr = [0 for _ in range(range_of_elements)] 
+    output_arr = [0 for _ in range(len(arr))] 
+  
+    for i in range(len(arr)): 
+        count_arr[arr[i]-min_element] += 1
+  
+    for i in range(1, len(count_arr)): 
+        count_arr[i] += count_arr[i-1] 
+  
+    for i in range(iterations-1, -1, -1): 
+        output_arr[count_arr[arr[i] - min_element] - 1] = arr[i] 
+        count_arr[arr[i] - min_element] -= 1
+  
     for i in range(iterations): 
         arr[i] = output_arr[i] 
   
