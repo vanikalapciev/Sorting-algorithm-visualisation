@@ -7,20 +7,16 @@ Set up parameters in `main.py` and launch it!
 
 ## Sorting algorithms
 The script visualises next algorithms:
-- Bublle sort: `bubble_sort`
-- Selection sort: `selection_sort`
-- Insertion sort: `insertion_sort`
-- Heap sort: `heap_sort`
-- Merge sort: `merge_sort` - Buggy
-- Quick sort: `quick_sort`
-- Pigeonhole Sort: `pigeonhole_sort`
-- ShellSort: `shell_sort`
+- Bublle sort: `bubbleSort`
+- Selection sort: `selectionSort`
+- Insertion sort: `insertionSort`
+- Heap sort: `heapSort`
+- Pigeonhole Sort: `pigeonholeSort`
+- Shell sort: `shellSort`
+- Counting sort: `countSort`
+
 
 ## Co come:
-- Recursive Bubble Sort
-- Recursive Insertion Sort
-- Iterative Quick Sort
-- Counting Sort
 - Radix Sort
 - Bucket Sort
 - ShellSort
