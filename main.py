@@ -14,10 +14,10 @@ numbers = random.sample(range(1, sampleSize), sampleSize-1)
 
 #makes a array with each element with sorted run
 for i in range(sampleSize):
-    numbers = insertion_sort(numbers[:], i)
-    plt.bar(ind,numbers)
+    iteration = countSort(numbers[:], i)
+    plt.bar(ind,iteration)
     plt.pause(0.1)
-    print(numbers)
+    print(iteration)
     if i < sampleSize:
         plt.cla()
 
